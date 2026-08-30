@@ -98,11 +98,14 @@ main.container { padding-top: 36px; padding-bottom: 72px; min-height: 68vh; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('/images/hero.svg') center / cover no-repeat, linear-gradient(180deg, #eef2f0, #cfdbd8);
+  background:
+    radial-gradient(ellipse at center, rgba(247, 247, 245, 0.55) 0%, rgba(247, 247, 245, 0.22) 60%, rgba(247, 247, 245, 0) 100%),
+    url('/images/leaves.gif') center / cover no-repeat,
+    #dfe8e5;
 }
 .hero-inner { text-align: center; padding: 0 24px; }
-.hero-title { font-size: clamp(2rem, 6vw, 3.4rem); font-weight: 300; letter-spacing: 0.06em; margin: 0 0 14px; color: #3a4148; }
-.hero-sub { font-size: clamp(0.95rem, 2.4vw, 1.1rem); color: #66727a; margin: 0; font-weight: 400; letter-spacing: 0.02em; }
+.hero-title { font-size: clamp(2rem, 6vw, 3.4rem); font-weight: 300; letter-spacing: 0.06em; margin: 0 0 14px; color: #3a4148; text-shadow: 0 1px 22px rgba(255, 255, 255, 0.8); }
+.hero-sub { font-size: clamp(0.95rem, 2.4vw, 1.1rem); color: #66727a; margin: 0; font-weight: 400; letter-spacing: 0.02em; text-shadow: 0 1px 14px rgba(255, 255, 255, 0.8); }
 .hero-scroll {
   position: absolute;
   bottom: 26px;
@@ -114,6 +117,9 @@ main.container { padding-top: 36px; padding-bottom: 72px; min-height: 68vh; }
   color: #66727a;
   font-size: 12px;
   letter-spacing: 0.25em;
+  background: rgba(247, 247, 245, 0.65);
+  padding: 8px 16px;
+  border-radius: 999px;
   animation: heroFloat 2.8s ease-in-out infinite;
 }
 .hero-scroll .chevron { display: inline-flex; }
