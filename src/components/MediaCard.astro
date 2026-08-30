@@ -1,0 +1,32 @@
+---
+import { SHARE_TYPE_META, type ShareType } from '../lib/shares';
+import Rating from './Rating.astro';
+
+interface Props {
+  href: string;
+  title: string;
+  type: ShareType;
+  creator: string;
+  year?: number;
+  genre?: string;
+  rating?: number;
+  summary: string;
+  date: Date;
+}
+
+const { href, title, type, creator, year, genre, rating, summary, date } = Astro.props;
+const meta = SHARE_TYPE_META[type];
+const dateStr = date.toISOString().slice(0, 10);
+---
+<a class="card" href={href}>
+  <div class="card-top">
+    <span class="badge" style={`background:${meta.color}`}>{meta.label}</span>
+    <Rating rating={rating} />
+  </div>
+  <h3 class="card-title">{title}</h3>
+  <p class="card-sub">{creator}{year ? ` · ${year}` : ''}{genre ? ` · ${genre}` : ''}</p>
+  <p class="card-desc">{summary}</p>
+  <div class="card-meta">
+    <time datetime={dateStr}>{dateStr}</time>
+  </div>
+</a>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  date: Date;
+  tags?: string[];
+  badge?: { label: string; color?: string } | null;
+}
+
+const { href, title, description, date, tags = [], badge = null } = Astro.props;
+const dateStr = date.toISOString().slice(0, 10);
+---
+<a class="card" href={href}>
+  <div class="card-top">
+    <h3 class="card-title">{title}</h3>
+    {badge && (
+      <span class="badge" style={badge.color ? `background:${badge.color}` : undefined}>
+        {badge.label}
+      </span>
+    )}
+  </div>
+  <p class="card-desc">{description}</p>
+  <div class="card-meta">
+    <time datetime={dateStr}>{dateStr}</time>
+    {tags.length > 0 && <span class="tags">{tags.map((t) => `#${t}`).join(' ')}</span>}
+  </div>
+</a>

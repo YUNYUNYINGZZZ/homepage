@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MediaCard from '../../components/MediaCard.astro';
+import { SHARE_TYPES, SHARE_TYPE_META } from '../../lib/shares';
+
+const all = (await getCollection('shares')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const groups = SHARE_TYPES.map((type) => ({
+  type,
+  meta: SHARE_TYPE_META[type],
+  items: all.filter((p) => p.data.type === type),
+})).filter((g) => g.items.length > 0);
+---
+<BaseLayout title="书影音" description="读过的书、看过的电影、玩过的游戏、听过的音乐与其他分享。">
+  <h1 class="page-title">书影音</h1>
+  <p class="lead">读过的书、看过的电影、玩过的游戏、听过的音乐，以及一些其他分享。</p>
+
+  <nav class="filter" aria-label="按类型跳转">
+    {groups.map((group) => (
+      <a class="filter-chip" href={`#${group.type}`}>{group.meta.label}</a>
+    ))}
+  </nav>
+
+  {groups.map((group) => (
+    <section id={group.type}>
+      <h2 class="group-title">
+        <span class="badge" style={`background:${group.meta.color}`}>{group.meta.label}</span>
+      </h2>
+      <div class="grid">
+        {group.items.map((item) => (
+          <MediaCard
+            href={`/shares/${item.id}/`}
+            title={item.data.title}
+            type={item.data.type}
+            creator={item.data.creator}
+            year={item.data.year}
+            genre={item.data.genre}
+            rating={item.data.rating}
+            summary={item.data.summary}
+            date={item.data.date}
+          />
+        ))}
+      </div>
+    </section>
+  ))}
+</BaseLayout>

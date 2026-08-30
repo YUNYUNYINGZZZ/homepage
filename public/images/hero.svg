@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef2f1"/>
+      <stop offset="0.55" stop-color="#dfe8e5"/>
+      <stop offset="1" stop-color="#d2dfdb"/>
+    </linearGradient>
+    <linearGradient id="mFar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c3d4d0"/>
+      <stop offset="1" stop-color="#b2c7c2"/>
+    </linearGradient>
+    <linearGradient id="mMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a7bfba"/>
+      <stop offset="1" stop-color="#96b2ac"/>
+    </linearGradient>
+    <linearGradient id="mNear" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8aa7a0"/>
+      <stop offset="1" stop-color="#7c9a93"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.72" cy="0.2" r="0.55">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <path d="M0 570 C 140 470 260 500 420 430 C 580 360 700 470 880 430 C 1060 390 1180 470 1340 420 C 1480 380 1560 450 1600 470 L1600 900 L0 900 Z" fill="url(#mFar)" opacity="0.55"/>
+  <path d="M0 650 C 200 540 360 610 560 530 C 760 450 900 580 1100 540 C 1300 500 1440 570 1600 540 L1600 900 L0 900 Z" fill="url(#mMid)" opacity="0.75"/>
+  <path d="M0 760 C 240 690 420 760 640 700 C 860 640 1040 740 1260 700 C 1440 670 1540 720 1600 710 L1600 900 L0 900 Z" fill="url(#mNear)"/>
+</svg>

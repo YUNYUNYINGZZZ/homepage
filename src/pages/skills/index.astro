@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const posts = (await getCollection('skills')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+<BaseLayout title="技能学习" description="学习过程中的笔记与复盘。">
+  <h1 class="page-title">技能学习</h1>
+  <p class="lead">学习过程中的笔记与复盘。</p>
+  <div class="grid">
+    {posts.map((post) => (
+      <PostCard
+        href={`/skills/${post.id}/`}
+        title={post.data.title}
+        description={post.data.description}
+        date={post.data.date}
+        tags={post.data.tags}
+        badge={{
+          label: post.data.status,
+          color: post.data.status === '已完成' ? '#6f8f88' : '#9a7b57',
+        }}
+      />
+    ))}
+  </div>
+</BaseLayout>

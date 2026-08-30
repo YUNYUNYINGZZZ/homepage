@@ -1,0 +1,15 @@
+---
+interface Props {
+  rating?: number;
+  max?: number;
+}
+
+const { rating, max = 5 } = Astro.props;
+---
+{rating != null && (
+  <span class="stars" role="img" aria-label={`评分 ${rating} / ${max}`}>
+    {Array.from({ length: max }, (_, i) => (
+      <span class:list={['star', i < rating && 'on']} aria-hidden="true">★</span>
+    ))}
+  </span>
+)}
