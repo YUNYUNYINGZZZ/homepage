@@ -98,11 +98,12 @@ main.container { padding-top: 36px; padding-bottom: 72px; min-height: 68vh; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('/images/leaves.gif') center / cover no-repeat;
+  background: url('/images/leaves.png') center / cover no-repeat;
 }
 .hero-inner { text-align: center; padding: 0 24px; }
 .hero-title { font-size: clamp(2rem, 6vw, 3.4rem); font-weight: 300; letter-spacing: 0.06em; margin: 0 0 14px; color: #3a4148; }
 .hero-sub { font-size: clamp(0.95rem, 2.4vw, 1.1rem); color: #66727a; margin: 0; font-weight: 400; letter-spacing: 0.02em; }
+.hero-date { margin: 18px 0 0; font-size: 15px; letter-spacing: 0.1em; color: #66727a; font-weight: 400; }
 .hero-scroll {
   position: absolute;
   bottom: 26px;

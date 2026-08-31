@@ -39,6 +39,7 @@ const latest = [
     <div class="hero-inner">
       <h1 class="hero-title">{SITE_TITLE}</h1>
       <p class="hero-sub">{SITE_DESCRIPTION}</p>
+      <p class="hero-date" id="hero-date"></p>
     </div>
     <a class="hero-scroll" href="#content">
       <span>向下滚动</span>
@@ -69,4 +70,18 @@ const latest = [
       ))}
     </ul>
   </div>
+
+  <script is:inline>
+    (function () {
+      var el = document.getElementById('hero-date');
+      if (!el) return;
+      var WEEK = ['日', '一', '二', '三', '四', '五', '六'];
+      function render() {
+        var d = new Date();
+        el.textContent = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日 · 星期' + WEEK[d.getDay()];
+      }
+      render();
+      setInterval(render, 60000);
+    })();
+  </script>
 </BaseLayout>
