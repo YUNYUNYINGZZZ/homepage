@@ -87,7 +87,7 @@ main.container { padding-top: 36px; padding-bottom: 72px; min-height: 68vh; }
 .page-title { font-size: 30px; margin: 0 0 6px; font-weight: 500; }
 .lead { color: var(--text-muted); font-size: 16px; margin: 0 0 28px; }
 
-/* ===== 首页全屏 hero ===== */
+/* ===== 首页全屏 hero（树叶时钟） ===== */
 .hero-full {
   position: relative;
   width: 100vw;
@@ -98,21 +98,80 @@ main.container { padding-top: 36px; padding-bottom: 72px; min-height: 68vh; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('/images/leaves.png') center / cover no-repeat;
+  overflow: hidden;
+  background-color: #06170d;
 }
-.hero-inner { text-align: center; padding: 0 24px; }
-.hero-title { font-size: clamp(2rem, 6vw, 3.4rem); font-weight: 300; letter-spacing: 0.06em; margin: 0 0 14px; color: #3a4148; }
-.hero-sub { font-size: clamp(0.95rem, 2.4vw, 1.1rem); color: #66727a; margin: 0; font-weight: 400; letter-spacing: 0.02em; }
-.hero-date { margin: 18px 0 0; font-size: 15px; letter-spacing: 0.1em; color: #66727a; font-weight: 400; }
+.hero-full::before {
+  position: absolute;
+  inset: -2.5%;
+  z-index: 0;
+  content: "";
+  background: url('/images/leaves-clean.png') center / cover no-repeat;
+  animation: heroBreathe 24s ease-in-out infinite alternate;
+  will-change: transform, filter;
+}
+.hero-full::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  background: radial-gradient(circle at 50% 37%, transparent 0 15%, rgba(0, 12, 6, 0.08) 58%, rgba(0, 8, 4, 0.22) 100%);
+  pointer-events: none;
+}
+@keyframes heroBreathe {
+  from {
+    filter: brightness(0.96) saturate(0.98);
+    transform: scale(1.025) translate3d(-0.15%, 0.1%, 0);
+  }
+  to {
+    filter: brightness(1.035) saturate(1.035);
+    transform: scale(1.055) translate3d(0.2%, -0.15%, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-full::before { animation: none; transform: scale(1.025); }
+}
+.hero-inner {
+  position: absolute;
+  z-index: 2;
+  top: 37%;
+  left: 50%;
+  width: min(90vw, 760px);
+  padding: 0 24px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 12, 5, 0.38);
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+.hero-weekday {
+  margin-right: -0.34em;
+  font-family: "Century Gothic", "Segoe UI Light", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(2.45rem, 4.8vw, 4.85rem);
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: 0.34em;
+}
+.hero-date,
+.hero-time {
+  font-size: clamp(1rem, 1.55vw, 1.6rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+.hero-date { margin-top: 0.22em; }
+.hero-time { margin-top: 0.08em; font-variant-numeric: tabular-nums; }
 .hero-scroll {
   position: absolute;
   bottom: 26px;
   left: 50%;
+  z-index: 2;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  color: #66727a;
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 1px 3px rgba(0, 12, 5, 0.38);
   font-size: 12px;
   letter-spacing: 0.25em;
   animation: heroFloat 2.8s ease-in-out infinite;
@@ -187,6 +246,5 @@ main.container { padding-top: 36px; padding-bottom: 72px; min-height: 68vh; }
 
 /* ===== 响应式 ===== */
 @media (max-width: 720px) {
-  .hero-title { font-size: 26px; }
   .page-title, .article-header h1 { font-size: 25px; }
 }

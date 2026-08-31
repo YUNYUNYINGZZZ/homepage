@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { SHARE_TYPE_META } from '../lib/shares';
 
 const thoughts = await getCollection('thoughts');
@@ -37,9 +36,9 @@ const latest = [
 <BaseLayout>
   <section class="hero-full">
     <div class="hero-inner">
-      <h1 class="hero-title">{SITE_TITLE}</h1>
-      <p class="hero-sub">{SITE_DESCRIPTION}</p>
-      <p class="hero-date" id="hero-date"></p>
+      <div class="hero-weekday" id="hero-weekday"></div>
+      <div class="hero-date" id="hero-date"></div>
+      <div class="hero-time" id="hero-time"></div>
     </div>
     <a class="hero-scroll" href="#content">
       <span>向下滚动</span>
@@ -73,15 +72,24 @@ const latest = [
 
   <script is:inline>
     (function () {
-      var el = document.getElementById('hero-date');
-      if (!el) return;
-      var WEEK = ['日', '一', '二', '三', '四', '五', '六'];
+      var weekdayEl = document.getElementById('hero-weekday');
+      var dateEl = document.getElementById('hero-date');
+      var timeEl = document.getElementById('hero-time');
+      if (!weekdayEl || !dateEl || !timeEl) return;
+      var WEEK = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+      var MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+      function pad(n) { return String(n).padStart(2, '0'); }
       function render() {
         var d = new Date();
-        el.textContent = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日 · 星期' + WEEK[d.getDay()];
+        weekdayEl.textContent = WEEK[d.getDay()];
+        dateEl.textContent = pad(d.getDate()) + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+        timeEl.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
       }
-      render();
-      setInterval(render, 60000);
+      function tick() {
+        render();
+        setTimeout(tick, 1000 - (Date.now() % 1000) + 8);
+      }
+      tick();
     })();
   </script>
 </BaseLayout>
