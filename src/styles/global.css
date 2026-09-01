@@ -14,6 +14,7 @@
   --radius: 14px;
   --max-w: 1040px;
   --header-bg: rgba(247, 247, 245, 0.82);
+  --header-h: 68px;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
 
@@ -72,9 +73,10 @@ main.container { padding-top: 36px; padding-bottom: 72px; min-height: 68vh; }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  flex-wrap: wrap;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  flex-wrap: nowrap;
+  height: var(--header-h);
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .brand { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: #000; }
 .brand:hover { color: #2f5d4e; }
@@ -96,7 +98,7 @@ main.container { padding-top: 36px; padding-bottom: 72px; min-height: 68vh; }
   position: relative;
   width: 100vw;
   margin-left: calc(-1 * (100vw - 100%) / 2);
-  margin-top: -36px;
+  margin-top: calc(-36px - var(--header-h));
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
@@ -250,5 +252,9 @@ main.container { padding-top: 36px; padding-bottom: 72px; min-height: 68vh; }
 
 /* ===== 响应式 ===== */
 @media (max-width: 720px) {
+  :root { --header-h: 56px; }
+  .brand { font-size: 18px; }
+  .nav-links { gap: 4px; }
+  .nav-links a { font-size: 13px; padding: 5px 9px; }
   .page-title, .article-header h1 { font-size: 25px; }
 }
